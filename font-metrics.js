@@ -16,7 +16,7 @@ var FontMetrics = function($, style, fontSize){
     usFontWidth.push(tEl.width())
   }
   tEl.text("1 1"), usFontWidth[32] = tEl.width() - 2*usFontWidth["1".charCodeAt(0)]
-  tEl.text("你"), cnFontWidth = tEl.width();
+  tEl.text("\u4f60"), cnFontWidth = tEl.width();
   
   tEl.remove();
   tEl = null;
