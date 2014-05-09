@@ -7,7 +7,7 @@ var FontMetrics = function($, style, fontSize){
   tEl.css("position", "absolute");
   tEl.css("left", "-9999px");
   tEl.css("top", "-9999px");
-  document.body.appendChild(tEl);
+  tEl.appendTo(document.body);
   
   var usFontWidth = [];
   var cnFontWidth = 0;
@@ -18,6 +18,6 @@ var FontMetrics = function($, style, fontSize){
   tEl.text("1 1"), usFontWidth[32] = tEl.width() - 2*usFontWidth["1".charCodeAt(0)]
   tEl.text("你"), cnFontWidth = tEl.width();
   
-  document.body.removeChild(tEl);
+  tEl.remove();
   tEl = null;
 };
