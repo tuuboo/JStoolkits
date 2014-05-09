@@ -1,4 +1,4 @@
-var FontMetrics = function($, style, fontSize){
+var FontMetrics = function($, fontSize, style){
   var tEl = $("<span>");
   if(style != null) {
     tEl.style = style;
