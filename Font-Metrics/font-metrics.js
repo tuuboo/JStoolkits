@@ -1,7 +1,7 @@
 var FontMetrics = function($, fontSize, style){
   var tEl = $("<span>");
   if(style != null) {
-    tEl.style = style;
+    tEl.attr("style", style);
   }
   tEl.css("font-size", fontSize + "px");
   tEl.css("position", "absolute");
@@ -15,13 +15,13 @@ var FontMetrics = function($, fontSize, style){
     tEl.text(String.fromCharCode(i));
     this.usFontWidth.push(tEl.width())
   }
-  tEl.text("1 1"), this.usFontWidth[0x20] = tEl.width() - 2*this.usFontWidth["1".charCodeAt(0)]
-  tEl.text("\u4f60"), this.cnFontWidth = tEl.width();
+  this.usFontWidth[0x20] = tEl.text("1 1").width() - 2*this.usFontWidth["1".charCodeAt(0)]
+  this.cnFontWidth = tEl.text("\u4f60").width();
+  this.dotdotdotWidth = tEl.text("...").width();
   
   tEl.remove();
   tEl = null;
   
-  this.dotdotdotWidth = this.usFontWidth[46] * 3;
   this.maxFontWidth = this.cnFontWidth;
   for(var i=0; i<this.usFontWidth.length; i++) {
     if(this.usFontWidth[i]>this.maxFontWidth){
