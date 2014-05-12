@@ -17,12 +17,26 @@
     <title>Font-Metrics Demo</title>
 		
 		<script>
-			$.ready(function(){
-				$("#in_fontsize").on("change", function(){setup();}).fire("change");
-	
+			$(document).ready(function(){
+				$("#in_width").on("change", function(e){strip();});
+				$("#in_text").on("change", function(e){strip();});
+				$("#in_fontsize").on("change", function(e){setup();});
+				$("#in_style").on("change", function(e){setup();}).trigger("change")
 			});
 			function setup(){
-					$("#code_setup").text("var fm = new FontMetrics($, "+$("#in_style").val()+",'"+$("#in_fontsize").val()+"' )");
+				$("#code_setup").text("fm = new FontMetrics($, "+$("#in_fontsize").val()+",'"+$("#in_style").val()+"' )");
+				fm = new FontMetrics($, $("#in_fontsize").val(), $("#in_style").val());
+				$("#sp_ori, #sp_strip").attr("style", $("#in_style").val()).css("font-size", $("#in_fontsize").val()+"px").css("border", "1px solid");
+				strip();
+			}
+			function strip(){
+				$("#code_strip").text("str = fm.strip('"+$("#in_text").val()+"',"+$("#in_width").val()+" )");
+				
+				$("#sp_ori").text($("#in_text").val());
+				$("#sp_strip").text(fm.strip($("#in_text").val(), parseInt($("#in_width").val())));
+				
+				$("#sp_ori_width").text("width:"+$("#sp_ori").width()+"px");
+				$("#sp_strip_width").text("width:"+$("#sp_strip").width()+"px");
 			}
 		</script>
 		
@@ -32,7 +46,8 @@
     <div class="jumbotron">
       <div class="container">
         <h1>Font-Metrics Demo</h1>
-        <p>演示如何使用Font-Metrics如何使用。</p>
+        <p>演示如何使用Font-Metrics对文本进行截断。</p>
+				<p><a class="btn btn-default" role="button" href="https://github.com/tuuboo/JStoolkits/tree/master/Font-Metrics">Code on GitHub »</a></p>
       </div>
     </div>
 		<div class="container">
@@ -44,28 +59,28 @@
 						字号：<input type="text" id="in_fontsize" size="4" value="12"/>px<br/>
 						样式：<input type="text" id="in_style" value="font-weight:bold" size="35"/>
 					</p>
-					<p><code id="code_setup">代码</code></p>
+					<p><code id="code_setup"></code></p>
 				</div>
 				<div class="col-md-6">
-					<h4>第二步：设置样式</h4>
+					<h4>第二步：文本截断</h4>
 					<p>
-						截断宽度:<input type="text" id="in_width" size="4" value="50"/>px<br/>
-						输入文本：<input type="text" id="in_text" size="60" value="12"/>
+						截断宽度:<input type="text" id="in_width" size="4" value="150"/>px<br/>
+						输入文本：<input type="text" id="in_text" size="60" value="测试文本截断.Test strip 123456789abcedstfgiiii"/>
 					</p>
 					<p><code id="code_strip">代码</code></p>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-					<h4>效果预览</h4>
-					<p>原始文本：<span id="sp_ori" style="border:1px solid;"></span></p>
-					<p>截断文本：<span id="sp_strip" style="border:1px solid;"></span></p>
+					<h4>效果展示</h4>
+					<p>原始文本：<span id="sp_ori" style="border:1px solid;"></span> <span id="sp_ori_width"></span></p>
+					<p>截断文本：<span id="sp_strip" style="border:1px solid;"></span> <span id="sp_strip_width"></span></p>
 				</div>
 			</div>
 			
 			<hr/>
 			<footer>
-				<p>@ Copyright 2014</p>
+				<p>@Tuuboo Copyright 2014</p>
 			</footer>
 		
 		</div>
