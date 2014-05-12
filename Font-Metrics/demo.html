@@ -9,11 +9,23 @@
     <script src="http://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+		<script src="font-metrics.js"></script>
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
     <title>Font-Metrics Demo</title>
+		
+		<script>
+			$.ready(function(){
+				$("#in_fontsize").on("change", function(){setup();}).fire("change");
+	
+			});
+			function setup(){
+					$("#code_setup").text("var fm = new FontMetrics($, "+$("#in_style").val()+",'"+$("#in_fontsize").val()+"' )");
+			}
+		</script>
+		
   </head>
 
   <body>
@@ -25,16 +37,37 @@
     </div>
 		<div class="container">
 			
-			<div class="well" style="line-height:1.4em">
-				字号：<input type="text" id="in_fontsize" size="4" value="12"/>px，截断宽度:<input type="text" id="in_fontsize" size="4" value="50"/>px, 样式：<input type="text" id="in_style" value="font-weight:bold" size="35"/><br/>
-				文本：<input type="text" id="in_fontsize" size="80" value="12"/>
+			<div class="row">
+				<div class="col-md-6">
+					<h4>第一步：设置样式</h4>
+					<p>
+						字号：<input type="text" id="in_fontsize" size="4" value="12"/>px<br/>
+						样式：<input type="text" id="in_style" value="font-weight:bold" size="35"/>
+					</p>
+					<p><code id="code_setup">代码</code></p>
+				</div>
+				<div class="col-md-6">
+					<h4>第二步：设置样式</h4>
+					<p>
+						截断宽度:<input type="text" id="in_width" size="4" value="50"/>px<br/>
+						输入文本：<input type="text" id="in_text" size="60" value="12"/>
+					</p>
+					<p><code id="code_strip">代码</code></p>
+				</div>
 			</div>
-			效果:
-			<div class="well" id="ori">
-				原始样式：adf
+			<div class="row">
+				<div class="col-md-12">
+					<h4>效果预览</h4>
+					<p>原始文本：<span id="sp_ori" style="border:1px solid;"></span></p>
+					<p>截断文本：<span id="sp_strip" style="border:1px solid;"></span></p>
+				</div>
 			</div>
-			代码：
-  		<pre><code>代码</code></pre>
+			
+			<hr/>
+			<footer>
+				<p>@ Copyright 2014</p>
+			</footer>
+		
 		</div>
   </body>
 </html>
